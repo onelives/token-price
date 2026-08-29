@@ -1,0 +1,14 @@
+{
+  "name": "token-price",
+  "version": "1.0.0",
+  "private": true,
+  "description": "百炼 × 原厂 三方价格对比，GitHub Actions 每日自动更新并发布到 Pages",
+  "scripts": {
+    "fetch": "node scripts/fetch.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.0"
+  }
+}

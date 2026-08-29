@@ -1,0 +1,92 @@
+{
+  "updatedAt": "2026-08-29",
+  "status": {
+    "bailian": "ok",
+    "deepseek": "ok",
+    "bigmodel": "manual"
+  },
+  "models": {
+    "qwen3.8-max": {
+      "bailian": {
+        "in": 12,
+        "out": 36,
+        "cacheIn": 1.5,
+        "batchIn": 6,
+        "batchOut": 18
+      },
+      "origin": null
+    },
+    "qwen3.7-max": {
+      "bailian": {
+        "in": 12,
+        "out": 36,
+        "cacheIn": 2.4,
+        "batchIn": 6,
+        "batchOut": 18
+      },
+      "origin": null
+    },
+    "qwen3.7-plus": {
+      "bailian": {
+        "in": 2,
+        "out": 8,
+        "cacheIn": 0.4,
+        "batchIn": 1,
+        "batchOut": 4
+      },
+      "origin": null
+    },
+    "deepseek-v4-pro": {
+      "bailian": {
+        "in": 12,
+        "out": 24,
+        "cacheIn": 1,
+        "batchIn": null,
+        "batchOut": null
+      },
+      "origin": {
+        "in": 9,
+        "out": 27,
+        "cacheIn": 0.3,
+        "offPeak": {
+          "in": 4.5,
+          "out": 13.5,
+          "cacheIn": 0.15
+        }
+      }
+    },
+    "deepseek-v4-flash": {
+      "bailian": {
+        "in": 1,
+        "out": 2,
+        "cacheIn": 0.2,
+        "batchIn": null,
+        "batchOut": null
+      },
+      "origin": {
+        "in": 3,
+        "out": 9,
+        "cacheIn": 0.1,
+        "offPeak": {
+          "in": 1.5,
+          "out": 4.5,
+          "cacheIn": 0.05
+        }
+      }
+    },
+    "glm-5.2": {
+      "bailian": {
+        "in": 8,
+        "out": 28,
+        "cacheIn": 2,
+        "batchIn": null,
+        "batchOut": null
+      },
+      "origin": {
+        "in": 8,
+        "out": 28,
+        "cacheIn": 2
+      }
+    }
+  }
+}
