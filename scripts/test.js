@@ -60,6 +60,10 @@ function ovTarget(i, from) {
   return a ? a.getAttribute('target') : null;
 }
 function myCell(i) { return ovText(i, 2); }
+function myCls(i, idx) {
+  const spans = ovRow(i)[2].querySelectorAll('span');
+  return spans[idx].className;
+}
 
 console.log('\n【1】页面结构：单表速览，无卡片，折扣默认 0');
 {
@@ -105,6 +109,23 @@ console.log('\n【4】折扣计算：填 8 折，我方 = 百炼标准价 × 0.8
     setRate(id, 8);
     check(id + ' 我方价 ' + fmt(b.in * 0.8) + '/' + fmt(b.out * 0.8), myCell(i), fmt(b.in * 0.8) + ' / ' + fmt(b.out * 0.8));
   });
+}
+
+console.log('\n【4b】我方价颜色：对比原厂（千问取百炼），绿=低、红=高');
+{
+  // deepseek-v4-pro 8折：我方 9.6/19.2 vs 原厂 9/27 → 输入高于原厂(红)、输出低于原厂(绿)
+  const i = IDS.indexOf('deepseek-v4-pro');
+  setRate('deepseek-v4-pro', 8);
+  check('deepseek-v4-pro 输入 9.6>9 红', myCls(i, 0), 'lose');
+  check('deepseek-v4-pro 输出 19.2<27 绿', myCls(i, 1), 'save');
+  // qwen3.8-max 8折 vs 百炼 12/36 → 全绿
+  const j = IDS.indexOf('qwen3.8-max');
+  check('qwen3.8-max 输入 9.6<12 绿', myCls(j, 0), 'save');
+  check('qwen3.8-max 输出 28.8<36 绿', myCls(j, 1), 'save');
+  // 默认 0 折：0 < 参考 → 全绿
+  setRate('deepseek-v4-pro', '');
+  check('deepseek-v4-pro 默认 0 折输入绿', myCls(i, 0), 'save');
+  setRate('deepseek-v4-pro', 8); // 还原，避免影响后续用例
 }
 
 console.log('\n【5】计费模拟：多档折扣（deepseek-v4-pro，百炼 12/24）');

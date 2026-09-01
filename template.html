@@ -88,6 +88,9 @@
   .ov-tbl .ov-rate .dunit { font-size: 12px; color: var(--ink-faint); margin-left: 4px; }
   .ov-tbl tbody tr:hover { background: var(--thead); }
   .ov-tbl td .dim { font-size: 12px; }
+  .save { color: var(--good); font-weight: 700; }
+  .lose { color: var(--bad); font-weight: 700; }
+  .even { color: var(--ink-faint); }
 
   /* ===== 参考明细 ===== */
   section.ref { margin-top: 44px; }
@@ -278,6 +281,14 @@
         if (vIn === null) return '<span class="dim">待填</span>';
         return '<a href="' + href + '" target="_blank" rel="noopener">' + fmtMoney(vIn) + ' / ' + fmtMoney(vOut) + '</a>';
       }
+      // 我方价颜色：绿 = 低于对比基准（原厂价；千问无原厂取百炼），红 = 高于
+      var refIn = og ? ogIn : bl.inP;
+      var refOut = og ? ogOut : bl.outP;
+      function priceCls(our, ref) {
+        if (our < ref - 0.0001) return 'save';
+        if (our > ref + 0.0001) return 'lose';
+        return 'even';
+      }
 
       // ===== 顶部速览表行（全部模型，含折扣输入）=====
       ovRows +=
@@ -287,7 +298,10 @@
             '<input id="rate-' + m.id + '" data-model="' + m.id + '" data-kind="rate" type="number" min="0" max="10" step="0.1" placeholder="如 8" value="' + esc(shownRate) + '">' +
             '<span class="dunit">折</span>' +
           '</td>' +
-          '<td class="ours-col">' + fmtMoney(myIn) + ' / ' + fmtMoney(myOut) + '</td>' +
+          '<td class="ours-col">' +
+            '<span class="' + priceCls(myIn, refIn) + '">' + fmtMoney(myIn) + '</span> / ' +
+            '<span class="' + priceCls(myOut, refOut) + '">' + fmtMoney(myOut) + '</span>' +
+          '</td>' +
           '<td>' + priceCell(bl.inP, bl.outP, blLink) + '</td>' +
           '<td>' + priceCell(ogIn, ogOut, ogLink) + (og ? '' : ' <span class="dim">(=百炼)</span>') + '</td>' +
         '</tr>';
@@ -296,7 +310,7 @@
     ovHost.innerHTML =
       '<section class="ref overview">' +
         '<h2>速览：全部模型价格</h2>' +
-        '<p class="section-note">单价 元 / ' + unitLabel() + '（输入 / 输出）。我方价 = 百炼标准价 × 折数，直接填折扣自动更新；点击任一价格可跳转官方页核价；千问系列原厂即百炼。</p>' +
+        '<p class="section-note">单价 元 / ' + unitLabel() + '（输入 / 输出）。我方价 = 百炼标准价 × 折数，直接填折扣自动更新；点击任一价格可跳转官方页核价；千问系列原厂即百炼。我方价颜色：<b class="save">绿=低于原厂</b>（千问取百炼）、<b class="lose">红=高于原厂</b>。</p>' +
         '<div class="table-scroll"><table class="ref-tbl ov-tbl">' +
           '<thead><tr><th>模型</th><th>我方折扣</th><th class="ours-col">我方 输入/输出</th><th>百炼官网 输入/输出</th><th>原厂 输入/输出</th></tr></thead>' +
           '<tbody>' + ovRows + '</tbody>' +
