@@ -73,69 +73,21 @@
   .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .toolbar .hint { font-size: 13px; color: var(--ink-faint); }
 
-  /* ===== 模型卡片 ===== */
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px 22px 18px; margin-bottom: 18px;
+  /* ===== 顶部速览表 ===== */
+  .overview { margin: 6px 0 30px; }
+  .ov-tbl .ours-col { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; }
+  .ov-tbl .mid { font-size: 12px; font-weight: 400; }
+  .ov-tbl .ov-model { white-space: nowrap; }
+  .ov-tbl .ov-rate { white-space: nowrap; }
+  .ov-tbl .ov-rate input {
+    width: 68px; font: inherit; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;
+    padding: 4px 7px; border: 1px solid var(--line-strong); border-radius: 6px;
+    background: var(--input-bg); color: var(--ink); text-align: right;
   }
-  .card-head {
-    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
-  }
-  .card-head .mname { font-size: 18px; font-weight: 700; }
-  .card-head .mid { color: var(--ink-faint); font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .card-head .src { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-  .src a {
-    font-size: 12px; color: var(--accent); text-decoration: none;
-    border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 9px; white-space: nowrap;
-  }
-  .src a:hover { background: var(--accent-soft); }
-  .src a .v { color: var(--ink-faint); }
-
-  .cols { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 14px; }
-  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
-
-  .pane { border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px 12px; }
-  .pane.ours { border-color: var(--accent); background: var(--accent-soft); }
-  .pane h3 { margin: 0 0 3px; font-size: 13.5px; font-weight: 700; color: var(--ink); }
-  .pane .p-note { font-size: 11.5px; color: var(--ink-faint); margin: 0 0 10px; }
-  .pane table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  .pane td { padding: 3px 0; }
-  .pane td:first-child { color: var(--ink-soft); }
-  .pane td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
-  .pane .strike { color: var(--ink-faint); font-weight: 400; }
-
-  .price-inputs { display: flex; gap: 10px; margin-bottom: 8px; }
-  .field { flex: 1; }
-  .field label { display: block; font-size: 11.5px; color: var(--ink-soft); margin-bottom: 3px; }
-  .field input {
-    width: 100%; font: inherit; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums;
-    padding: 7px 9px; border: 1px solid var(--line-strong); border-radius: 7px;
-    background: var(--input-bg); color: var(--ink);
-  }
-  .field input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
-  .field input::placeholder { color: var(--ink-faint); font-weight: 400; }
-
-  .ours-empty { font-size: 12.5px; color: var(--ink-faint); margin: 4px 0 2px; }
-
-  /* 三方对比表 */
-  .cmp3 {
-    margin-top: 14px; border-top: 1px dashed var(--line-strong); padding-top: 12px;
-  }
-  .cmp3-scroll { overflow-x: auto; }
-  .cmp3 table { border-collapse: collapse; width: 100%; font-size: 14px; }
-  .cmp3 th, .cmp3 td { padding: 7px 12px; text-align: right; white-space: nowrap; }
-  .cmp3 th:first-child, .cmp3 td:first-child { text-align: left; color: var(--ink-soft); }
-  .cmp3 thead th {
-    background: var(--thead); color: var(--ink-soft); font-size: 12.5px; font-weight: 600;
-    border-bottom: 1px solid var(--line-strong);
-  }
-  .cmp3 tbody td { border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
-  .cmp3 .ours-col { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; }
-  .cmp3 .th-note { font-weight: 400; color: var(--ink-faint); font-size: 11px; }
-  .cmp3-unit { margin: 8px 0 0; font-size: 12px; color: var(--ink-faint); }
-  .cmp3-diff { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-soft); }
-  .cmp3-diff .lbl { color: var(--ink-faint); font-size: 12px; }
-  .save { color: var(--good); } .lose { color: var(--bad); } .even { color: var(--ink-faint); }
+  .ov-tbl .ov-rate input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .ov-tbl .ov-rate .dunit { font-size: 12px; color: var(--ink-faint); margin-left: 4px; }
+  .ov-tbl tbody tr:hover { background: var(--thead); }
+  .ov-tbl td .dim { font-size: 12px; }
 
   /* ===== 参考明细 ===== */
   section.ref { margin-top: 44px; }
@@ -181,7 +133,7 @@
 
   <p class="kicker">阿里云百炼 · 三向价格对比</p>
   <h1>我方折扣 × 百炼官网 × 模型原厂</h1>
-  <p class="lede">六个模型的三方价格同屏对比：左栏填入我方折扣（基于百炼标准价，如 8 = 8折，自动保存本机），价格与差额自动算出；中栏为百炼官网价格（含缓存/Batch 折扣），右栏为模型原厂直销价格。</p>
+  <p class="lede">一张表看全所有模型价格：表内直接填我方折扣（如 8 = 8折，自动保存本机）即得我方价，点击任一价格可跳转官方页核价。</p>
   <p class="meta">币种：人民币（元）· 百炼价格取华北2（北京）· 原厂价取各家官方定价页 · 更新于 2026-08-29</p>
 
   <div class="toolbar">
@@ -192,7 +144,7 @@
     <span class="hint" id="unit-hint">当前：元 / 百万 token</span>
   </div>
 
-  <div id="cards"></div>
+  <div id="overview"></div>
 
   <!-- ======== 参考明细 ======== -->
   <section class="ref">
@@ -348,13 +300,9 @@
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
   /* ===== 卡片渲染 ===== */
-  function row(label, val, cls) {
-    return '<tr><td>' + label + '</td><td class="' + (cls || '') + '">' + val + '</td></tr>';
-  }
-
   function render() {
-    var host = document.getElementById('cards');
-    var html = '';
+    var ovHost = document.getElementById('overview');
+    var ovRows = '';
     DATA.forEach(function (m) {
       var bl = m.bailian;
       var og = m.origin;
@@ -366,128 +314,47 @@
       var myOut = (rate !== null && !isNaN(rate)) ? bl.outP * rate / 10 : null;
       var shownRate = (rate !== null && !isNaN(rate)) ? String(rate) : '';
 
-      // ===== 我方面板 =====
-      var oursPane =
-        '<div class="pane ours">' +
-          '<h3>我方折扣</h3>' +
-          '<p class="p-note">基于百炼标准价 · 自动保存本机</p>' +
-          '<div class="price-inputs">' +
-            '<div class="field"><label for="rate-' + m.id + '">折扣（折）</label>' +
-            '<input id="rate-' + m.id + '" data-model="' + m.id + '" data-kind="rate" type="number" min="0" max="10" step="0.1" placeholder="如 8" value="' + esc(shownRate) + '"></div>' +
-          '</div>' +
-          (myIn === null
-            ? '<p class="ours-empty">填入折数后自动算出我方价格与差额<br>（8 = 8折，即百炼标准价的 80%）</p>'
-            : '<table>' +
-                row('输入', fmtMoney(myIn) + ' 元') +
-                row('输出', fmtMoney(myOut) + ' 元') +
-              '</table>' +
-              '<p class="ours-empty">元 / ' + unitLabel() + '</p>') +
-        '</div>';
-
-      // ===== 百炼面板 =====
-      var blRows =
-        row('输入（标准）', fmtMoney(bl.inP) + ' 元') +
-        row('输出（标准）', fmtMoney(bl.outP) + ' 元') +
-        row('输入（缓存命中）', fmtMoney(bl.cacheIn) + ' 元') +
-        (bl.batchIn !== null
-          ? row('输入（Batch 5折）', fmtMoney(bl.batchIn) + ' 元') +
-            row('输出（Batch 5折）', fmtMoney(bl.batchOut) + ' 元')
-          : row('Batch', '<span class="strike">不支持</span>')) +
-        (m.snapAvg ? row(m.snapAvg.name, fmtMoney(m.snapAvg.inP) + ' / ' + fmtMoney(m.snapAvg.outP)) : '');
-      var blPane =
-        '<div class="pane">' +
-          '<h3>百炼官网价格</h3>' +
-          '<p class="p-note">华北2（北京）· 元 / ' + unitLabel() + '</p>' +
-          '<table>' + blRows + '</table>' +
-        '</div>';
-
-      // ===== 原厂面板 =====
-      var ogPane;
-      if (og) {
-        var ogOff = og.offPeak
-          ? '<p class="p-note" style="margin-top:8px">高峰时段价；空闲时段输入 ' + fmtMoney(og.offPeak.inP) + ' / 输出 ' + fmtMoney(og.offPeak.outP) + '（半价）</p>'
-          : '';
-        ogPane =
-          '<div class="pane">' +
-            '<h3>原厂价格 · ' + esc(m.vendor) + '</h3>' +
-            '<p class="p-note">官方定价页 · 元 / ' + unitLabel() + '</p>' +
-            '<table>' +
-              row('输入（标准·高峰）', fmtMoney(og.inP) + ' 元') +
-              row('输出（标准·高峰）', fmtMoney(og.outP) + ' 元') +
-              row('输入（缓存命中）', fmtMoney(og.cacheIn) + ' 元') +
-            '</table>' + ogOff +
-          '</div>';
-      } else {
-        ogPane =
-          '<div class="pane">' +
-            '<h3>原厂价格 · ' + esc(m.vendor) + '</h3>' +
-            '<p class="p-note">' + esc(m.originNote) + '</p>' +
-            '<table>' +
-              row('输入（标准）', fmtMoney(bl.inP) + ' 元') +
-              row('输出（标准）', fmtMoney(bl.outP) + ' 元') +
-              row('输入（缓存命中）', fmtMoney(bl.cacheIn) + ' 元') +
-            '</table>' +
-          '</div>';
-      }
-
-      // ===== 三方对比表：我方折扣 vs 百炼 vs 原厂 =====
       var ogIn = og ? og.inP : bl.inP;
       var ogOut = og ? og.outP : bl.outP;
+      var blLink = m.linkBailian;
+      var ogLink = m.linkOrigin || blLink;
 
-      function cmpCell(our, base) {
-        if (our === null) return '<span class="dim">待填</span>';
-        return fmtMoney(our);
-      }
-      function cmpDiff(our, base, dirWord) {
-        if (our === null) return '';
-        var d = base - our;
-        var cls = d > 0.0001 ? 'save' : (d < -0.0001 ? 'lose' : 'even');
-        var word = d > 0.0001 ? '省' : (d < -0.0001 ? '贵' : '平');
-        if (Math.abs(d) <= 0.0001) return '<span class="even">与' + dirWord + '持平</span>';
-        return '<span class="' + cls + '">较' + dirWord + word + ' ' + fmtMoney(Math.abs(d)) + ' 元</span>';
+      // 价格单元格 = 可点击超链接（百炼 → 百炼官方页；原厂 → 原厂定价页；我方价由折扣计算、无链接）
+      function priceCell(vIn, vOut, href) {
+        if (vIn === null) return '<span class="dim">待填</span>';
+        return '<a href="' + href + '" target="_blank" rel="noopener">' + fmtMoney(vIn) + ' / ' + fmtMoney(vOut) + '</a>';
       }
 
-      var cmpTable =
-        '<div class="cmp3">' +
-          '<div class="cmp3-scroll"><table>' +
-            '<thead><tr><th></th><th class="ours-col">我方折扣价</th><th>百炼官网价</th><th>原厂价' + (og ? '' : '<span class="th-note">（=百炼）</span>') + '</th></tr></thead>' +
-            '<tbody>' +
-              '<tr><td>输入</td><td class="ours-col">' + cmpCell(myIn) + '</td><td>' + fmtMoney(bl.inP) + '</td><td>' + fmtMoney(ogIn) + '</td></tr>' +
-              '<tr><td>输出</td><td class="ours-col">' + cmpCell(myOut) + '</td><td>' + fmtMoney(bl.outP) + '</td><td>' + fmtMoney(ogOut) + '</td></tr>' +
-            '</tbody>' +
-          '</table></div>' +
-          '<p class="cmp3-unit">单位：元 / ' + unitLabel() + '（单价）</p>' +
-          (myIn === null
-            ? '<p class="cmp3-diff dim">填入左栏折扣后，此处直接显示我方 vs 百炼、我方 vs 原厂的金额差异。</p>'
-            : '<p class="cmp3-diff">' +
-                '输入：' + cmpDiff(myIn, bl.inP, '百炼') + ' · ' + cmpDiff(myIn, ogIn, '原厂') +
-                '<br>输出：' + cmpDiff(myOut, bl.outP, '百炼') + ' · ' + cmpDiff(myOut, ogOut, '原厂') +
-                '<span class="lbl">（每' + unitLabel() + '）</span>' +
-              '</p>') +
-        '</div>';
-
-      // ===== 来源链接 =====
-      var srcHtml = '<a href="' + m.linkBailian + '" target="_blank" rel="noopener">百炼官方 ↗</a>';
-      if (m.linkOrigin) srcHtml += '<a href="' + m.linkOrigin + '" target="_blank" rel="noopener">' + esc(m.vendor.split(' ')[0]) + '原厂 ↗</a>';
-
-      html +=
-        '<div class="card" id="card-' + m.id + '">' +
-          '<div class="card-head">' +
-            '<span class="mname">' + esc(m.label) + '</span>' +
-            '<span class="mid">' + esc(m.id) + '</span>' +
-            '<span class="src">' + srcHtml + '</span>' +
-          '</div>' +
-          '<div class="cols">' + oursPane + blPane + ogPane + '</div>' +
-          cmpTable +
-        '</div>';
+      // ===== 顶部速览表行（全部模型，含折扣输入）=====
+      ovRows +=
+        '<tr>' +
+          '<td class="ov-model">' + esc(m.label) + ' <span class="mid dim">' + esc(m.id) + '</span></td>' +
+          '<td class="ov-rate">' +
+            '<input id="rate-' + m.id + '" data-model="' + m.id + '" data-kind="rate" type="number" min="0" max="10" step="0.1" placeholder="如 8" value="' + esc(shownRate) + '">' +
+            '<span class="dunit">折</span>' +
+          '</td>' +
+          '<td class="ours-col">' + (myIn === null ? '<span class="dim">待填</span>' : fmtMoney(myIn) + ' / ' + fmtMoney(myOut)) + '</td>' +
+          '<td>' + priceCell(bl.inP, bl.outP, blLink) + '</td>' +
+          '<td>' + priceCell(ogIn, ogOut, ogLink) + (og ? '' : ' <span class="dim">(=百炼)</span>') + '</td>' +
+        '</tr>';
     });
-    host.innerHTML = html;
+
+    ovHost.innerHTML =
+      '<section class="ref overview">' +
+        '<h2>速览：全部模型价格</h2>' +
+        '<p class="section-note">单价 元 / ' + unitLabel() + '（输入 / 输出）。我方价 = 百炼标准价 × 折数，直接填折扣自动更新；点击任一价格可跳转官方页核价；千问系列原厂即百炼。</p>' +
+        '<div class="table-scroll"><table class="ref-tbl ov-tbl">' +
+          '<thead><tr><th>模型</th><th>我方折扣</th><th class="ours-col">我方 输入/输出</th><th>百炼官网 输入/输出</th><th>原厂 输入/输出</th></tr></thead>' +
+          '<tbody>' + ovRows + '</tbody>' +
+        '</table></div>' +
+      '</section>';
+
     bindInputs();
   }
 
   /* ===== 输入事件 ===== */
   function bindInputs() {
-    var inputs = document.querySelectorAll('#cards input[data-model]');
+    var inputs = document.querySelectorAll('input[data-model]');
     inputs.forEach(function (el) {
       el.addEventListener('input', function () {
         var id = el.getAttribute('data-model');
