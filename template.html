@@ -260,12 +260,13 @@
       var bl = m.bailian;
       var og = m.origin;
       var mine = ours[m.id] || {};
-      var rate = (mine.rate !== undefined && mine.rate !== null && mine.rate !== '') ? Number(mine.rate) : null;
+      var rawRate = (mine.rate !== undefined && mine.rate !== null && mine.rate !== '') ? Number(mine.rate) : 0;
+      var rate = (!isNaN(rawRate)) ? rawRate : 0;
 
-      // 我方价 = 百炼标准价 × 折数 / 10（规范单位：元/百万 token）
-      var myIn = (rate !== null && !isNaN(rate)) ? bl.inP * rate / 10 : null;
-      var myOut = (rate !== null && !isNaN(rate)) ? bl.outP * rate / 10 : null;
-      var shownRate = (rate !== null && !isNaN(rate)) ? String(rate) : '';
+      // 我方价 = 百炼标准价 × 折数 / 10（规范单位：元/百万 token），折扣默认 0
+      var myIn = bl.inP * rate / 10;
+      var myOut = bl.outP * rate / 10;
+      var shownRate = String(rate);
 
       var ogIn = og ? og.inP : bl.inP;
       var ogOut = og ? og.outP : bl.outP;
@@ -286,7 +287,7 @@
             '<input id="rate-' + m.id + '" data-model="' + m.id + '" data-kind="rate" type="number" min="0" max="10" step="0.1" placeholder="如 8" value="' + esc(shownRate) + '">' +
             '<span class="dunit">折</span>' +
           '</td>' +
-          '<td class="ours-col">' + (myIn === null ? '<span class="dim">待填</span>' : fmtMoney(myIn) + ' / ' + fmtMoney(myOut)) + '</td>' +
+          '<td class="ours-col">' + fmtMoney(myIn) + ' / ' + fmtMoney(myOut) + '</td>' +
           '<td>' + priceCell(bl.inP, bl.outP, blLink) + '</td>' +
           '<td>' + priceCell(ogIn, ogOut, ogLink) + (og ? '' : ' <span class="dim">(=百炼)</span>') + '</td>' +
         '</tr>';

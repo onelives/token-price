@@ -61,11 +61,13 @@ function ovTarget(i, from) {
 }
 function myCell(i) { return ovText(i, 2); }
 
-console.log('\n【1】页面结构：单表速览，无卡片');
+console.log('\n【1】页面结构：单表速览，无卡片，折扣默认 0');
 {
   check('速览表共 ' + IDS.length + ' 行', document.querySelectorAll('#overview .ov-tbl tbody tr').length, IDS.length);
   check('无模型卡片', document.querySelectorAll('.card').length, 0);
   check('有单位切换', !!document.getElementById('btn-m') && !!document.getElementById('btn-y'), true);
+  check('折扣输入默认 0', document.getElementById('rate-qwen3.8-max').value, '0');
+  check('qwen3.8-max 我方列默认 0 折', myCell(0), '0 / 0');
 }
 
 console.log('\n【2】速览表百炼/原厂列与 prices.json 一致');
@@ -122,16 +124,16 @@ console.log('\n【5】计费模拟：多档折扣（deepseek-v4-pro，百炼 12/
   }
 }
 
-console.log('\n【6】计费模拟：空值与非法输入回到待填');
+console.log('\n【6】计费模拟：空值与非法输入按默认 0 处理');
 {
   const i = IDS.indexOf('deepseek-v4-pro');
   const el = document.getElementById('rate-deepseek-v4-pro');
   el.value = '';
   el.dispatchEvent(new window.Event('input', { bubbles: true }));
-  check('清空 → 待填', myCell(i), '待填');
+  check('清空 → 0 折', myCell(i), '0 / 0');
   el.value = 'abc';
   el.dispatchEvent(new window.Event('input', { bubbles: true }));
-  check('非法输入 abc → 待填', myCell(i), '待填');
+  check('非法输入 abc → 0 折', myCell(i), '0 / 0');
 }
 
 console.log('\n【7】计费显示：切到亿 token（×100）');
@@ -152,7 +154,7 @@ console.log('\n【8】切回百万 token（还原）');
 console.log('\n【9】清空折扣收尾');
 {
   setRate('glm-5.2', '');
-  check('glm-5.2 回到待填', myCell(IDS.indexOf('glm-5.2')), '待填');
+  check('glm-5.2 回到默认 0 折', myCell(IDS.indexOf('glm-5.2')), '0 / 0');
 }
 
 console.log(`\n===== 结果：${pass} 通过 / ${fail} 失败 =====`);
